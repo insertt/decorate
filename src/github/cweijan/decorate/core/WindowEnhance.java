@@ -17,7 +17,7 @@ public class WindowEnhance{
     private int yOld = 0;
     private JFrame frame;
     private static boolean disableDragAble = false;
-    public static boolean draging=false;
+    public static boolean draging = false;
 
     WindowEnhance(JFrame frame){
 
@@ -143,7 +143,7 @@ public class WindowEnhance{
             @Override
             public void mouseReleased(MouseEvent e){
 
-                draging=false;
+                draging = false;
             }
         });
 
@@ -157,7 +157,7 @@ public class WindowEnhance{
                 int yy = yOnScreen - yOld;
                 if(!disableDragAble){
                     frame.setLocation(xx, yy);
-                    draging=true;
+                    draging = true;
                 }
             }
         });

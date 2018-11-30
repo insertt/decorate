@@ -32,7 +32,6 @@ public class WindowSizer{
                 int width = frame.getWidth();
                 int height = frame.getHeight();
                 boolean isNormal = true;
-                // TODO 获取最下面的组件
                 WindowEnhance.disableDragable();
                 if(e.getX() <= 3){
                     //西
@@ -121,6 +120,7 @@ public class WindowSizer{
                         break;
                     case south:
                         frame.setBounds(frame.getX(), frame.getY(), frame.getWidth(), frame.getHeight() - (y - e.getY()));
+                        y=e.getY();
                         break;
                     case sw:
                         frame.setBounds(frame.getX() + (e.getX() - x), frame.getY(), frame.getWidth() - (e.getX() - x), frame.getHeight() - (y - e.getY()));
@@ -147,6 +147,7 @@ public class WindowSizer{
         frame.getContentPane().addMouseMotionListener(cursorChanger);
         frame.getJMenuBar().addMouseListener(windowChanger);
         frame.getJMenuBar().addMouseMotionListener(cursorChanger);
+
 
     }
 
