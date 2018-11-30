@@ -1,6 +1,6 @@
 # Intellij Idea Decorate Plugin
 
-It let intellij idea title beautify!
+Let intellij idea title beautify!
 
 inspire for [ideaDecorateSwitcher](https://github.com/vkatz/ideaDecorateSwitcher)
 
