@@ -1,0 +1,31 @@
+<idea-plugin>
+  <id>com.your.company.unique.plugin.id</id>
+  <name>decorate</name>
+  <version>1.0</version>
+  <vendor email="cweijan@163.com">cweijan</vendor>
+
+  <description><![CDATA[
+      Hide title menu for windows<br>
+      Possible issues with fullscreen mode after switching.<br>
+    ]]></description>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="173.0"/>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <!-- uncomment to enable plugin in all products
+  <depends>com.intellij.modules.lang</depends>
+  -->
+
+  <extensions defaultExtensionNs="com.intellij">
+    <applicationConfigurable instance="github.cweijan.decorate.init.Configuration" displayName="Switch decorate mode"/>
+  </extensions>
+  <depends>com.intellij.modules.platform</depends>
+  <application-components>
+    <component>
+      <implementation-class>github.cweijan.decorate.init.DecorateIniaializer</implementation-class>
+    </component>
+  </application-components>
+
+</idea-plugin>
