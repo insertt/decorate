@@ -7,9 +7,14 @@ import com.intellij.openapi.wm.WindowManagerListener;
 import github.cweijan.decorate.core.DecorateModeSwitcher;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DecorateIniaializer implements ApplicationComponent{
 
     DecorateIniaializer(){
+
+        List<Integer> already=new ArrayList<>();
 
         DecorateModeSwitcher modeSwitcher = new DecorateModeSwitcher();
 
@@ -17,7 +22,9 @@ public class DecorateIniaializer implements ApplicationComponent{
             @Override
             public void frameCreated(@NotNull IdeFrame ideFrame){
 
+                if(already.contains(ideFrame.hashCode()))return;
                 modeSwitcher.update(ideFrame);
+                already.add(ideFrame.hashCode());
 
             }
 
