@@ -10,7 +10,7 @@ import java.awt.*;
 
 public class DecorateModeSwitcher{
 
-    public void update(final IdeFrame ideFrame){
+    public void decorate(final IdeFrame ideFrame){
 
         final JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(ideFrame.getComponent());
 

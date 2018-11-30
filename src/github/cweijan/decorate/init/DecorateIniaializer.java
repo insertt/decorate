@@ -23,7 +23,7 @@ public class DecorateIniaializer implements ApplicationComponent{
             public void frameCreated(@NotNull IdeFrame ideFrame){
 
                 if(already.contains(ideFrame.hashCode()))return;
-                modeSwitcher.update(ideFrame);
+                modeSwitcher.decorate(ideFrame);
                 already.add(ideFrame.hashCode());
 
             }

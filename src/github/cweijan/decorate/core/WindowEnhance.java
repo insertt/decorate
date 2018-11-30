@@ -1,9 +1,11 @@
 package github.cweijan.decorate.core;
 
+import com.intellij.openapi.actionSystem.impl.ActionMenu;
 import com.intellij.openapi.util.IconLoader;
 import github.cweijan.decorate.util.WindowUtils;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -74,10 +76,11 @@ public class WindowEnhance{
     void beautyMenu(){
 
         JMenuBar menuBar = frame.getJMenuBar();
-        Font font = new Font("微软雅黑", Font.PLAIN, 25);
-        menuBar.setBackground(Color.getColor("303845"));
-        menuBar.setBorder(BorderFactory.createCompoundBorder(menuBar.getBorder(), BorderFactory.createEmptyBorder(5, 6, 4, 6)));
-        menuBar.setFont(font);
+        menuBar.setBorder(BorderFactory.createCompoundBorder(menuBar.getBorder(),  BorderFactory.createEmptyBorder(5, 6, 4, 6)));
+        for(Component component : menuBar.getComponents()){
+            if(component.getClass()!= ActionMenu.class)continue;
+            ((ActionMenu)component).setMnemonicEnabled(false);
+        }
 
         menuBar.addMouseListener(new MouseAdapter(){
             @Override
