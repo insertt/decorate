@@ -21,7 +21,7 @@ public class DecorateModeSwitcher{
         windowEnhance.beautyMenu();
         windowEnhance.dragAble(frame.getJMenuBar());
         setDecorateMode(frame);
-        WindowState.recoveryWindow(frame,true);
+        WindowState.maximizeWindow(frame);
     }
 
     private static void setDecorateMode(JFrame frame){
