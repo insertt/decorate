@@ -15,6 +15,14 @@ public class ColourHoverListener extends MouseAdapter{
     }
 
     @Override
+    public void mouseEntered(MouseEvent e){
+
+        component.setBackground(Color.decode("#434C59"));
+
+    }
+
+
+    @Override
     public void mouseExited(MouseEvent e){
         component.setBackground(defaultColor);
     }
