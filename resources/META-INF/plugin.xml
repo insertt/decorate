@@ -1,7 +1,7 @@
 <idea-plugin>
   <id>github.cweijan.decorate</id>
   <name>decorate</name>
-  <version>1.1</version>
+  <version>1.2</version>
   <vendor email="cweijan@163.com">cweijan</vendor>
 
   <description><![CDATA[
