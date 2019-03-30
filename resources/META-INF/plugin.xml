@@ -1,16 +1,20 @@
 <idea-plugin>
-  <id>com.your.company.unique.plugin.id</id>
+  <id>github.cweijan.decorate</id>
   <name>decorate</name>
-  <version>1.0</version>
+  <version>1.1</version>
   <vendor email="cweijan@163.com">cweijan</vendor>
 
   <description><![CDATA[
-      Hide title menu for windows<br>
-      Possible issues with fullscreen mode after switching.<br>
+      Beautify title menu for intellij idea windows version.<br>
+      Post issues to https://github.com/cweijan/decorate/issues
     ]]></description>
 
+  <change-notes>
+    1.1: Add MenuItem Hover Color, and add menuTool margin.
+  </change-notes>
+
   <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-  <idea-version since-build="163.0"/>
+  <idea-version since-build="172.0"/>
 
   <depends>com.intellij.modules.platform</depends>
   <application-components>

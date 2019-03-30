@@ -2,16 +2,17 @@ package github.cweijan.decorate.core;
 
 import com.intellij.openapi.actionSystem.impl.ActionMenu;
 import com.intellij.openapi.util.IconLoader;
+import com.intellij.util.ui.JBUI;
+import github.cweijan.decorate.menu.ColourHoverListener;
 import github.cweijan.decorate.util.WindowUtils;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
 
 public class WindowEnhance{
 
@@ -31,42 +32,20 @@ public class WindowEnhance{
      */
     void createMenuTool(){
 
-        JMenuBar menuBar = frame.getJMenuBar();
         JPanel panel = new JPanel();
         FlowLayout flowLayout = new FlowLayout();
         flowLayout.setAlignment(FlowLayout.RIGHT);
         panel.setLayout(flowLayout);
-        panel.setBackground(null);
-        JLabel minimize = new JLabel(IconLoader.getIcon("/icon/minimize.png"));
-        minimize.setHorizontalAlignment(SwingConstants.CENTER);
-        minimize.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseClicked(MouseEvent e){
 
-                frame.setExtendedState(Frame.ICONIFIED);
-            }
-        });
-        JLabel decorate = new JLabel(IconLoader.getIcon("/icon/ic_decorate_mode.png"));
-        decorate.setHorizontalAlignment(SwingConstants.CENTER);
-        decorate.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseClicked(MouseEvent e){
+        JPanel minimizePanel = createMinimizePanel();
+        JPanel decoratePanel = createDecoratePanel();
+        JPanel exitPanel = createExitPanel();
 
-                WindowUtils.toggleWindow(frame);
-            }
-        });
-        JLabel exit = new JLabel(IconLoader.getIcon("/icon/ic_exit.png"));
-        exit.setHorizontalAlignment(SwingConstants.CENTER);
-        exit.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseClicked(MouseEvent e){
+        panel.add(minimizePanel);
+        panel.add(decoratePanel);
+        panel.add(exitPanel);
 
-                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-            }
-        });
-        panel.add(minimize);
-        panel.add(decorate);
-        panel.add(exit);
+        JMenuBar menuBar = frame.getJMenuBar();
         menuBar.add(panel, menuBar.getMenuCount() + 1);
     }
 
@@ -76,10 +55,11 @@ public class WindowEnhance{
     void beautyMenu(){
 
         JMenuBar menuBar = frame.getJMenuBar();
-        menuBar.setBorder(BorderFactory.createCompoundBorder(menuBar.getBorder(),  BorderFactory.createEmptyBorder(5, 6, 4, 6)));
+        menuBar.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         for(Component component : menuBar.getComponents()){
-            if(component.getClass()!= ActionMenu.class)continue;
-            ((ActionMenu)component).setMnemonicEnabled(false);
+            if(component.getClass() != ActionMenu.class) continue;
+            component.addMouseListener(new ColourHoverListener(component));
+            ((ActionMenu) component).setMnemonicEnabled(false);
         }
 
         menuBar.addMouseListener(new MouseAdapter(){
@@ -109,12 +89,9 @@ public class WindowEnhance{
         }
 
         JLabel icon = new JLabel(appIcon);
-        JLabel iconOffset1 = new JLabel(" ");
-        JLabel iconOffset2 = new JLabel(" ");
+        icon.setBorder(JBUI.Borders.empty(0, 8));
         if(showIcon){
-            menuBar.add(iconOffset1, 0);
-            menuBar.add(icon, 1);
-            menuBar.add(iconOffset2, 2);
+            menuBar.add(icon, 0);
         }
 
     }
@@ -165,6 +142,73 @@ public class WindowEnhance{
             }
         });
 
+    }
+
+    @NotNull
+    private JPanel createExitPanel(){
+
+        JPanel exitPanel = new JPanel();
+        JLabel exit = new JLabel(IconLoader.getIcon("/icon/ic_exit.png"));
+        exit.setHorizontalAlignment(SwingConstants.CENTER);
+        exit.addMouseListener(new ColourHoverListener(exitPanel));
+        exitPanel.addMouseListener(new ColourHoverListener(exitPanel));
+        exitPanel.setBorder(JBUI.Borders.empty(2, 8));
+
+        MouseAdapter decorateHandler = new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+
+                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+            }
+        };
+        exit.addMouseListener(decorateHandler);
+        exitPanel.addMouseListener(decorateHandler);
+        exitPanel.add(exit);
+        return exitPanel;
+    }
+
+    @NotNull
+    private JPanel createDecoratePanel(){
+
+        JPanel decoratePanel = new JPanel();
+        JLabel decorate = new JLabel(IconLoader.getIcon("/icon/ic_decorate_mode.png"));
+        decorate.addMouseListener(new ColourHoverListener(decoratePanel));
+        decorate.setHorizontalAlignment(SwingConstants.CENTER);
+        decoratePanel.addMouseListener(new ColourHoverListener(decoratePanel));
+        decoratePanel.setBorder(JBUI.Borders.empty(2, 8));
+        MouseAdapter decorateHandler = new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+
+                WindowUtils.toggleWindow(frame);
+            }
+        };
+        decorate.addMouseListener(decorateHandler);
+        decoratePanel.addMouseListener(decorateHandler);
+        decoratePanel.add(decorate);
+        return decoratePanel;
+    }
+
+    @NotNull
+    private JPanel createMinimizePanel(){
+
+        JPanel minimizePanel = new JPanel();
+        JLabel minimize = new JLabel(IconLoader.getIcon("/icon/minimize.png"));
+        minimize.setHorizontalAlignment(SwingConstants.CENTER);
+        minimize.addMouseListener(new ColourHoverListener(minimizePanel));
+        minimizePanel.addMouseListener(new ColourHoverListener(minimizePanel));
+        minimizePanel.setBorder(JBUI.Borders.empty(2, 8));
+        MouseAdapter minimizeHandler = new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+
+                frame.setExtendedState(Frame.ICONIFIED);
+            }
+        };
+        minimize.addMouseListener(minimizeHandler);
+        minimizePanel.addMouseListener(minimizeHandler);
+        minimizePanel.add(minimize);
+        return minimizePanel;
     }
 
 }
