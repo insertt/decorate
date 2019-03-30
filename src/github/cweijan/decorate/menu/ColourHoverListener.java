@@ -44,6 +44,7 @@ public class ColourHoverListener extends MouseAdapter{
         for(MenuElement subElement : subElements){
             if(subElement instanceof JMenuItem){
                 JMenuItem actionMenuItem = (JMenuItem) subElement;
+                if(actionMenuItem.getSubElements().length>0)continue;
                 actionMenuItem.setUI(new ColourMenuItemUi());
             }
         }
